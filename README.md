@@ -1,5 +1,5 @@
 # Portfolio Site
 
-Portfolio site made using HTML5. Check it out [here](https://cirillojon.github.io/Portfolio/).
+Portfolio site made using HTML5. 
 
-Link: https://cirillojon.github.io/Portfolio/
+Check it out: https://cirillojon.github.io/Portfolio/
