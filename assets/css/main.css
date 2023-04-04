@@ -687,6 +687,12 @@ input, select, textarea {
 			top: 0.25em;
 		}
 
+		.my-class::before {
+			content: "\A";
+			white-space: pre;
+		  }
+		  
+
 		.image.fit {
 			display: block;
 			margin: 0 0 2rem 0;
