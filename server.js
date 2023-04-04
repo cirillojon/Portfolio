@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const app = express();
 
 // Serve static files
@@ -27,28 +27,29 @@ app.post('/api/chat', async (req, res) => {
 });
 
 async function callChatGPTAPI(message, apiKey) {
-
-  const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-002/completions';
-  const prompt = `User: ${message}\nAssistant:`;
-
-  const response = await fetch(apiUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      prompt: prompt,
-      max_tokens: 150,
-      n: 1,
-      stop: null,
-      temperature: 1
-    })
-  });
-
-  const data = await response.json();
-  return data.choices[0].text.trim();
-}
+    const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-002/completions';
+  
+    const prompt = `User: ${message}\nAssistant:`;
+  
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        prompt: prompt,
+        max_tokens: 150,
+        n: 1,
+        stop: null,
+        temperature: 1
+      })
+    });
+  
+    const data = await response.json();
+    return data.choices[0].text.trim();
+  }
+  
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
