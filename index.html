@@ -79,6 +79,70 @@
          background-color: rgba(0, 0, 0, 0.1);
          text-align: center;
          }
+         .quiz-container {
+         margin-bottom: 1.5rem;
+         }
+
+         .question {
+         margin-bottom: 1.5rem;
+         }
+
+         .answer-option {
+         display: block;
+         position: relative;
+         padding-left: 35px;
+         margin-bottom: 12px;
+         cursor: pointer;
+         font-size: 18px;
+         user-select: none;
+         }
+
+         .answer-option input {
+         position: absolute;
+         opacity: 0;
+         cursor: pointer;
+         }
+
+         .checkmark {
+         position: absolute;
+         top: 0;
+         left: 0;
+         height: 25px;
+         width: 25px;
+         background-color: #eee;
+         border-radius: 50%;
+         }
+
+         .answer-option:hover input ~ .checkmark {
+         background-color: #ccc;
+         }
+
+         .answer-option input:checked ~ .checkmark {
+         background-color: #2196F3;
+         }
+
+         .checkmark:after {
+         content: "";
+         position: absolute;
+         display: none;
+         }
+
+         .answer-option input:checked ~ .checkmark:after {
+         display: block;
+         }
+
+         .checkmark:after {
+         top: 9px;
+         left: 9px;
+         width: 8px;
+         height: 8px;
+         border-radius: 50%;
+         background: white;
+         }
+
+         .trivia-widget {
+         margin-bottom: 2rem;
+         }
       </style>
    </head>
    <body class="is-preload">
@@ -112,7 +176,7 @@
                   <li><a href="#WorkExperience">Work Experience</a></li>
                   <li><a href="#Projects">Projects</a></li>
                   <li><a href="#Education">Education & Skills</a></li>
-                  <li><a href="#elements"> Sandbox</a></li>
+                  <li><a href="#sandbox"> Sandbox</a></li>
                </ul>
             </nav>
          </header>
@@ -280,8 +344,8 @@
                   <a href="https://www.jetbrains.com/idea/">IntelliJ</a>
                </p>
             </article>
-            <!-- Elements -->
-            <article id="elements">
+            <!-- sandbox -->
+            <article id="sandbox">
                <h2 class="major">Sandbox</h2>
                <!-- Weather -->
                <h2 class="major">Weather</h2>
@@ -292,6 +356,34 @@
                   <input type="text" id="city-input" placeholder="Enter a city">
                   <button id="fetch-weather-btn">Fetch Weather</button>
                </div>
+               <!-- Spotify Playlist -->
+               <h2 class="major">Playlist</h2>
+               <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1NnqtTmlBt1ziKcpg8DyAF?utm_source=generator" 
+               width="100%" height="200" frameBorder="0" allowfullscreen="" allow="autoplay; 
+               clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+               <!-- Chess Puzzle -->
+               <h2 class="major">Chess Puzzle</h2>
+               <div id="csoDpCon"> class ="widget"</div>
+               <script type="text/javascript" src="https://www.chessstrategyonline.com/js/widgets.min.js"></script>
+               <script type="text/javascript">
+                  csoDailyPuzzle({
+                     boardStyle: "default",
+                  pieceStyle: "uscf",
+                  showCoordinates: true,
+                  width: 420
+                  });
+               </script>
+
+               <!-- Trivia -->
+               <div class="trivia-widget">
+                  <h2 class="major">Trivia</h2>
+                  <button id="view-quiz-btn">View Quiz</button>
+                  <button id="hide-quiz-btn" style="display: none;">Hide Quiz</button>
+                  <div id="quiz-container" class="quiz-container" style="display: none;"></div>
+                  <div id="score-display"></div>
+               </div>
+ 
                <!-- Joke -->
                <h2 class="major">Random Joke</h2>
                <div id="joke-widget" class="widget">
@@ -300,6 +392,8 @@
                   <button id="fetch-joke-btn">Fetch Joke</button>
                </div>
             </article>
+
+            <!-- Contact Me -->
             <article id="Contact">
                <section>
                   <h3 class="major">Contact Me</h3>
@@ -359,5 +453,6 @@
       <script src="assets/js/main.js"></script>
       <script src="assets/js/weather.js"></script>
       <script src="assets/js/fetchJoke.js"></script>
+      <script src="assets/js/quiz.js"></script>
    </body>
 </html>
