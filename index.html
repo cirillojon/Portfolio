@@ -133,6 +133,39 @@
          .trivia-widget {
          margin-bottom: 2rem;
          }
+
+         .chat-widget {
+         width: 300px;
+         height: 500px;
+         border: 1px solid #ccc;
+         display: flex;
+         flex-direction: column;
+         }
+
+         .chat-messages {
+         flex-grow: 1;
+         overflow-y: auto;
+         padding: 1rem;
+         }
+
+         .chat-input-form {
+         display: flex;
+         border-top: 1px solid #ccc;
+         }
+
+         #user-message {
+         flex-grow: 1;
+         border: none;
+         padding: 0.5rem;
+         }
+
+         /* button {
+         background-color: #007BFF;
+         color: white;
+         border: none;
+         padding: 0.5rem;
+         } */
+
       </style>
    </head>
    <body class="is-preload">
@@ -372,13 +405,13 @@
                /* Use media queries to adjust the width and height for different screen sizes */
                @media screen and (max-width: 768px) {
                   iframe {
-                     width: 75%;
+                     width: 100%;
                      height: 300px;
                   }
                }
                @media screen and (max-width: 480px) {
                   iframe {
-                     width: 50%;
+                     width: 100%;
                      height: 200px;
                   }
                }
@@ -402,6 +435,17 @@
                   <p id="joke-content">Click the button below to get a random joke!</p>
                   <button id="fetch-joke-btn">Fetch Joke</button>
                </div>
+
+               <!-- ChatBot -->
+               <h2 class="major">Chat bot</h2>
+               <div class="chat-widget">
+                  <div class="chat-messages" id="chat-messages"></div>
+                  <form class="chat-input-form" id="chat-input-form">
+                    <input type="text" id="user-message" placeholder="Type your message...">
+                    <button type="submit">Send</button>
+                  </form>
+                </div>
+                
             </article>
             <!-- Contact Me -->
             <article id="Contact">
@@ -464,5 +508,6 @@
       <script src="assets/js/weather.js"></script>
       <script src="assets/js/fetchJoke.js"></script>
       <script src="assets/js/quiz.js"></script>
+      <script src="assets/js/chat.js"></script>
    </body>
 </html>
