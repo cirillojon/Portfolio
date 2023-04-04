@@ -24,7 +24,7 @@ async function getGptResponse(prompt) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ prompt: prompt }),
+    body: JSON.stringify({ message: prompt }),
   });
 
   if (!response.ok) {
@@ -35,4 +35,3 @@ async function getGptResponse(prompt) {
   const data = await response.json();
   return data.message;
 }
-

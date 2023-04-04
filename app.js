@@ -1,54 +1,56 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-
-let fetch;
-
-(async () => {
-  const module = await import('node-fetch');
-  fetch = module.default;
-})();
-
-
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const fetch = require('node-fetch');
 const app = express();
 
+// Serve static files
+app.use(express.static('public'));
+
+// Enable CORS for all routes
 app.use(cors());
-app.use(bodyParser.json());
 
-app.post("/api/chat", async (req, res) => {
-  const prompt = req.body.prompt;
+// Accept JSON payloads
+app.use(express.json());
 
-  try {
-    const response = await fetch("https://api.openai.com/v1/engines/davinci-codex/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer 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`
-      },
-      body: JSON.stringify({
-        prompt: prompt,
-        max_tokens: 50,
-        n: 1,
-        stop: null,
-        temperature: 0.8,
-      }),
-    });
+// Get the API key from environment variables
+const apiKey = process.env.API_KEY;
 
-    if (!response.ok) {
-      console.error(`Error fetching GPT response: ${response.statusText}`);
-      res.status(response.status).json({ error: "Error fetching GPT response" });
-      return;
-    }
+// API route for chat
+app.post('/api/chat', async (req, res) => {
+  const message = req.body.message;
 
-    const data = await response.json();
-    res.json({ message: data.choices[0].text.trim() });
-  } catch (error) {
-    console.error(`Error fetching GPT response: ${error}`);
-    res.status(500).json({ error: "Error fetching GPT response" });
-  }
+  // Call the ChatGPT API
+  const responseMessage = await callChatGPTAPI(message, apiKey);
+
+  res.json({ message: responseMessage });
 });
+
+async function callChatGPTAPI(message, apiKey) {
+
+  const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-002/completions';
+  const prompt = `User: ${message}\nAssistant:`;
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      prompt: prompt,
+      max_tokens: 150,
+      n: 1,
+      stop: null,
+      temperature: 1
+    })
+  });
+
+  const data = await response.json();
+  return data.choices[0].text.trim();
+}
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  console.log(`Server is listening on port ${PORT}`);
 });
