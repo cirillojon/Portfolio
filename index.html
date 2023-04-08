@@ -14,159 +14,23 @@
          <link rel="stylesheet" href="assets/css/noscript.css" />
       </noscript>
       <style>
-         .container {
-         padding: 1.5em 0;
-         }
-         body {
-         font-family: 'Roboto', sans-serif;
-         }
-         h1, h2, h3, h4, h5, h6 {
-         font-weight: 600;
-         }
-         p {
-         line-height: 1.6;
-         }
-         a:hover {
-         color: #ff6e6c;
-         text-decoration: underline;
-         }
-         nav ul {
-         display: flex;
-         justify-content: space-around;
-         padding: 0;
-         list-style-type: none;
-         }
-         nav ul li a {
-         /* padding: 0.5em 1em; */
-         /* background-color: rgba(255, 255, 255, 0.1);
-         border-radius: 4px;
-         text-decoration: none; */
-         transition: all 0.3s;
-         }
-         nav ul li a:hover {
-         background-color: rgba(255, 255, 255, 0.3);
-         }
-         .image.main {
-         border-radius: 4px;
-         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-         }
-         h2.major {
-         word-break: break-word;
-         }
-         .widget {
-         background-color: #777777;
-         border-radius: 5px;
-         padding: 1rem;
-         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-         margin-bottom: 1.5rem;
-         text-align: center;
-         }
-         #city-name,
-         #joke-title {
-         margin-bottom: 0.5rem;
-         }
-         #temperature,
-         #joke-content {
-         font-size: 1.5rem;
-         font-weight: bold;
-         margin-bottom: 0.5rem;
-         }
-         #description {
-         text-transform: capitalize;
-         }
-         #footer {
-         padding: 1em 0;
-         background-color: rgba(0, 0, 0, 0.1);
-         text-align: center;
-         }
-         .quiz-container {
-         margin-bottom: 1.5rem;
-         }
-         .question {
-         margin-bottom: 1.5rem;
-         }
-         .answer-option {
-         display: block;
-         position: relative;
-         padding-left: 35px;
-         margin-bottom: 12px;
-         cursor: pointer;
-         font-size: 18px;
-         user-select: none;
-         }
-         .answer-option input {
-         position: absolute;
-         opacity: 0;
-         cursor: pointer;
-         }
-         .checkmark {
-         position: absolute;
-         top: 0;
-         left: 0;
-         height: 25px;
-         width: 25px;
-         background-color: #eee;
-         border-radius: 50%;
-         }
-         .answer-option:hover input ~ .checkmark {
-         background-color: #ccc;
-         }
-         .answer-option input:checked ~ .checkmark {
-         background-color: #2196F3;
-         }
-         .checkmark:after {
-         content: "";
-         position: absolute;
+         /* Moved to most to main.css for now */
+         .links-container {
          display: none;
          }
-         .answer-option input:checked ~ .checkmark:after {
+         .links-container.visible {
          display: block;
          }
-         .checkmark:after {
-         top: 9px;
-         left: 9px;
-         width: 8px;
-         height: 8px;
-         border-radius: 50%;
-         background: white;
+         .links-list {
+         position: absolute;
+         font-size: 1.2em; /* Adjust this value to control the font size */
          }
-         .trivia-widget {
-         margin-bottom: 2rem;
+         .links-list li {
+         padding: 0.3em 0; /* Adjust the padding for more or less space around the items */
+         margin: 0.2em 0; /* Adjust the margin for more or less space between the items */
          }
-
-         .chat-widget {
-         width: 300px;
-         height: 500px;
-         border: 1px solid #ccc;
-         display: flex;
-         flex-direction: column;
-         }
-
-         .chat-messages {
-         flex-grow: 1;
-         overflow-y: auto;
-         padding: 1rem;
-         }
-
-         .chat-input-form {
-         display: flex;
-         border-top: 1px solid #ccc;
-         }
-
-         #user-message {
-         flex-grow: 1;
-         border: none;
-         padding: 0.5rem;
-         }
-
-         /* button {
-         background-color: #007BFF;
-         color: white;
-         border: none;
-         padding: 0.5rem;
-         } */
-
       </style>
+      <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
    </head>
    <body class="is-preload">
       <!-- Wrapper -->
@@ -178,15 +42,28 @@
                   <h2>Software Engineer</h2>
                </div>
                <div class="col-md-4 text-right">
-                  <p><i class="fas fa-envelope"></i> <a href="mailto:jonathancirillo@outlook.com">jonathancirillo@outlook.com</a></p>
-                  <p><i class="fas fa-phone"></i> <a href="tel:4077181174">407.718.1174</a></p>
-                  <p><i class="fas fa-map-marker-alt"></i> Orlando, FL</p>
-                  <p><i class="fab fa-github"></i> <a href="https://github.com/cirillojon">github.com/cirillojon</a></p>
-                  <p><i class="fab fa-linkedin-in"></i> <a href="https://www.linkedin.com/in/jonathan-cirillo/">linkedin.com/in/jonathan-cirillo/</a></p>
-                  <p><i class="fas fa-file-download"></i> <a href="images/Resume.pdf" download>Download Resume</a></p>
+                  <button id="toggleLinksBtn">My links: </button>
+                  <div class="links-container" id="linksContainer">
+                     <ul class="links-list">
+                        <li><i class="fab fa-github"></i> <a href="https://github.com/cirillojon">github</a></li>
+                        <li><i class="fab fa-linkedin-in"></i> <a href="https://www.linkedin.com/in/jonathan-cirillo/">linkedin</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:jonathancirillo@outlook.com">email</a></li>
+                        <li><i class="fas fa-file-download"></i> <a href="images/Resume.pdf" download> resume</a></li>
+                     </ul>
+                  </div>
                </div>
             </div>
          </div>
+         <script>
+            // JavaScript for toggling links
+            const toggleLinksBtn = document.getElementById('toggleLinksBtn');
+            const linksContainer = document.getElementById('linksContainer');
+            
+            toggleLinksBtn.addEventListener('click', () => {
+                linksContainer.classList.toggle('visible');
+            });
+         </script>
+         <div id="threejs-container"></div>
          <!-- Header -->
          <header id="header">
             <div class="content">
@@ -199,7 +76,8 @@
                   <li><a href="#WorkExperience">Work Experience</a></li>
                   <li><a href="#Projects">Projects</a></li>
                   <li><a href="#Education">Education & Skills</a></li>
-                  <li><a href="#sandbox"> Sandbox</a></li>
+                  <li><a href="#sandbox">Sandbox</a></li>
+                  <li><a href="#Photography">Photography</a></li>
                </ul>
             </nav>
          </header>
@@ -244,6 +122,35 @@
                   <li>Produced comprehensive technical documentation, & facilitated multiple meetings to demonstrate findings.</li>
                </ul>
                <p><a href="https://www.informasoftware.com/">Link to company</a></p>
+               <h2 class="major">Papa Diesel's BBQ</h2>
+               <span class="image main"><img src="images/PDB.jpg" alt="" /></span>
+               <p><strong>Web Developer / Food Truck Staff</strong><br>
+                  August 2021 – Present | Orlando, FL
+               </p>
+               <ul>
+                  <li>Helped create an updated, more functional website for company using Bootstrap, HTML, CSS, and JavaScript</li>
+                  <li>Assists with various duties aboard the food truck such as, taking orders, preparing food, cutting meats, carrying and loading equipment, daily sanitization of the work environment, and overall quality assurance</li>
+               </ul>
+               <p><a href="https://www.facebook.com/PapaDieselsBBQ/">Link to company</a></p>
+               <h2 class="major">NBC Sports</h2>
+               <span class="image main"><img src="images/NBC.png" alt="" /></span>
+               <p><strong>Microphone Operator</strong><br>
+                  March 2020, 2021, 2022, 2023 | Orlando, FL | (SEASONAL)
+               </p>
+               <ul>
+                  <li>Assisted the NBC PGA Golf Tour, providing sound and running wireless microphones for a nationally televised broadcast featuring the world’s best at the annual Arnold Palmer Invitational Tournament</li>
+               </ul>
+               <p><a href="https://www.nbcsports.com/">Link to company</a></p>
+               <h2 class="major">Chess Instructor</h2>
+               <span class="image main"><img src="images/teacher.jpg" alt="" /></span>
+               <p><strong>Chess Instructor at Local Elementary School</strong><br>
+                  January 2019 - June 2019 | Orlando, FL
+               </p>
+               <ul>
+                  <li>Former competitive chess player</li>
+                  <li>Hired by old coach to replace him to lead and teach the chess club </li>
+                  <li>Taught elementary school kids in an after-school setting</li>
+               </ul>
             </article>
             <!-- Projects -->
             <article id="Projects">
@@ -277,7 +184,7 @@
                   <li>Led development of a Spotify web and mobile application called ‘Trendify’ that allowed users to connect their account and view in-depth listening data & track information.</li>
                   <li>Utilized Spotify’s API to fetch data and implemented a secure user login system.</li>
                </ul>
-               <p><strong>Link to project:</strong> <a href="https://trendify-project.herokuapp.com/login">https://trendify-project.herokuapp.com/login</a></p>
+               <p><strong>Link to project:</strong> <a href="https://trendify-project.herokuapp.com">https://trendify-project.herokuapp.com</a></p>
                <p><strong>Link to GitHub repository:</strong> <a href="https://github.com/cirillojon/Trendify-App">https://github.com/cirillojon/Trendify-App</a></p>
                <h2 class="major">Professor Contacts</h2>
                <span class="image main"><img src="images/Professor.png" alt="" /></span>
@@ -290,6 +197,35 @@
                </ul>
                <p><strong>Link to project:</strong> <a href="http://www.professorcontacts.com/">http://www.professorcontacts.com/</a></p>
                <p><strong>Link to GitHub repository:</strong> <a href="https://github.com/cirillojon/Professor-Contacts">https://github.com/cirillojon/Professor-Contacts</a></p>
+               <h2 class="major">Competitons</h2>
+               <h2 class="major">Kaggle</h2>
+               <span class="image main"><img src="images/kaggle.png" alt="" /></span>
+               <p><strong> Kaggle Machine Learning Competitions | 2021</strong> </p>
+               <p>Tools & Technologies: Python, NumPy, Sklearn, Tensorflow, Keras, and Pandas </p>
+               <ul>
+                  <li>Built a Convolutional Neural Network that classifies clothing on the Fashion-MNIST dataset with 94% accuracy</li>
+                  <li>Constructed a Sequential Neural Network that predicts the atomization energy of molecules on the QM7 dataset</li>
+               </ul>
+               <p><strong>Link to Kaggle Website:</strong> <a href="https://www.kaggle.com/competitions">https://www.kaggle.com/competitions</a></p>
+               <p><strong>Link to GitHub repository:</strong> <a href="https://github.com/cirillojon/Neural-Networks">https://github.com/cirillojon/Neural-Networks</a></p>
+               <h2 class="major">IBM Z Xplore</h2>
+               <span class="image main"><img src="images/IBM.png" alt="" /></span>
+               <p><strong> IBM Master the Mainframe Competiton | 2018</strong> </p>
+               <p>Tools & Technologies: REXX, COBOL, VSAM, REGEX, JCL, Python, Db2, SQL </p>
+               <ul>
+                  <li>Stage 2 Finalist in the annual IBM Master the Mainframe Competition now known as ‘IBM Z Xplore’</li>
+                  <li>Received hands-on experience within the z/OS system utilizing a variety of technologies and programming languages</li>
+               </ul>
+               <p><strong>Link to Competition Website:</strong> <a href="https://www.ibm.com/z/resources/zxplore">https://www.ibm.com/z/resources/zxplore</a></p>
+               <h2 class="major">MIT Zero Robotics</h2>
+               <span class="image main"><img src="images/Zero.png" alt="" /></span>
+               <p><strong> MIT Zero Robotics Competition | 2017</strong> </p>
+               <p>Tools & Technologies: C, SPHERES Simulator </p>
+               <ul>
+                  <li> Member of team that reached final stages in the tournament
+                  <li> Write code for satellites on the International Space Station to complete challenges</li>
+               </ul>
+               <p><strong>Link to Competition Website:</strong> <a href="https://zerorobotics.mit.edu/">https://zerorobotics.mit.edu/</a></p>
             </article>
             <!-- Education & Skills -->
             <article id="Education">
@@ -397,29 +333,28 @@
                   });
                </script>
                <style>
-               /* Set the default width and height */
-               iframe {
-                  width: 400px;
-                  height: 444px;
-               }
-               /* Use media queries to adjust the width and height for different screen sizes */
-               @media screen and (max-width: 768px) {
-                  iframe {
-                     width: 100%;
-                     height: 300px;
+                  /* Live Chess widget responsive container */
+                  .responsive-iframe-container {
+                  position: relative;
+                  padding-bottom: 111%; /* Adjust this value to maintain the desired aspect ratio */
+                  height: 0;
+                  overflow: hidden;
                   }
-               }
-               @media screen and (max-width: 480px) {
-                  iframe {
-                     width: 100%;
-                     height: 200px;
+                  .responsive-iframe-container iframe {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
                   }
-               }
                </style>
                <!-- Live Chess -->
                <h2 class="major">Live Chess</h2>
-               <iframe src="https://lichess.org/tv/frame?theme=brown&bg=dark" style="width: 400px; height: 444px;" allowtransparency="true" frameborder="0"></iframe>
-
+               <div class="live-chess-widget">
+                  <div class="responsive-iframe-container">
+                     <iframe src="https://lichess.org/tv/frame?theme=brown&bg=dark" allowtransparency="true" frameborder="0"></iframe>
+                  </div>
+               </div>
                <!-- Trivia -->
                <div class="trivia-widget">
                   <h2 class="major">Trivia</h2>
@@ -435,17 +370,25 @@
                   <p id="joke-content">Click the button below to get a random joke!</p>
                   <button id="fetch-joke-btn">Fetch Joke</button>
                </div>
-
                <!-- ChatBot -->
                <h2 class="major">Chat bot</h2>
                <div class="chat-widget">
                   <div class="chat-messages" id="chat-messages"></div>
                   <form class="chat-input-form" id="chat-input-form">
-                    <input type="text" id="user-message" placeholder="Type your message...">
-                    <button type="submit">Send</button>
+                     <input type="text" id="user-message" placeholder="Type your message...">
+                     <button type="submit">Send</button>
                   </form>
-                </div>
-                
+               </div>
+               <!-- NASA APOD -->
+               <h2 class="major">NASA Daily Pic</h2>
+               <div id="nasa-apod" class="widget"></div>
+            </article>
+            <!-- Photography -->
+            <article id="Photography">
+               <h2 class="major">Photography</h2>
+               <div id="image-gallery-wrapper">
+                  <div id="image-gallery"></div>
+               </div>
             </article>
             <!-- Contact Me -->
             <article id="Contact">
@@ -509,5 +452,8 @@
       <script src="assets/js/fetchJoke.js"></script>
       <script src="assets/js/quiz.js"></script>
       <script src="assets/js/chat.js"></script>
+      <script src="assets/js/loadImageGallery.js"></script>
+      <script src="assets/js/threejsSetup.js"></script>
+      <script src="assets/js/nasa-apod.js"></script>
    </body>
 </html>

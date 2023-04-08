@@ -14,17 +14,18 @@ chatInputForm.addEventListener("submit", async (event) => {
   const gptResponse = await getGptResponse(userMessage);
 
   // Display ChatGPT response
-  chatMessages.innerHTML += `<p><strong>ChatGPT:</strong> ${gptResponse}</p>`;
+  chatMessages.innerHTML += `<p><strong>Jon's Subconscious:</strong> ${gptResponse}</p>`;
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
-async function getGptResponse(prompt) {
+
+async function getGptResponse(message) {
   const response = await fetch("/api/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message: prompt }),
+    body: JSON.stringify({ message: message }),
   });
 
   if (!response.ok) {
@@ -35,3 +36,4 @@ async function getGptResponse(prompt) {
   const data = await response.json();
   return data.message;
 }
+
