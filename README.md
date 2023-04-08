@@ -1,5 +1,7 @@
 # Portfolio Site
 
-Portfolio site made using HTML5. 
+Project continued in 'Portfolio-Heroku repo'
 
-Check it out: https://cirillojon.github.io/Portfolio/
+Cannot use OpenAPI API key on public / static site such as GitHub pages. 
+
+Link to heroku site: https://cirillojon.herokuapp.com/
